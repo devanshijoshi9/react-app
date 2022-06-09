@@ -1,6 +1,6 @@
 import './Card.css';
 
-function card( props ) {
+const card = ( props ) => {
 
     // CSs class will not add directly so to apply expenseItems CSS, we need to add it manually.
     const classes = 'card ' + props.className;
