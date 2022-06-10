@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     // 3 useState for 3 different values
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -71,7 +71,13 @@ const ExpenseForm = () => {
             date: new Date(enteredDate),
         };
 
-        console.log(expenseData);
+        //Pass Expense data to NewExpense component.
+        props.onSaveExpenseData(expenseData);
+
+        // Clear the data after form submit.
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
     };
 
     return (
@@ -79,15 +85,31 @@ const ExpenseForm = () => {
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label>Title:</label>
-                    <input type="text" onChange={ titleChangeHandler } />
+                    <input
+                        type="text"
+                        value={enteredTitle}
+                        onChange={ titleChangeHandler }
+                    />
                 </div>
                 <div className="new-expense__control">
                     <label>Amount:</label>
-                    <input type="number" min="1" step="1" onChange={amountChangeHandler}/>
+                    <input
+                        type="number"
+                        min="1"
+                        step="1"
+                        value={enteredAmount}
+                        onChange={amountChangeHandler}
+                    />
                 </div>
                 <div className="new-expense__control">
                     <label>Date:</label>
-                    <input type="date" min="2019-01-01" max="2022-12-31" onChange={dateChangeHandler}/>
+                    <input
+                        type="date"
+                        value={enteredDate}
+                        min="2019-01-01"
+                        max="2022-12-31"
+                        onChange={dateChangeHandler}
+                    />
                 </div>
             </div>
             <div className="new-expense__actions">
